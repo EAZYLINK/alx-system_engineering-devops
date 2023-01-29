@@ -1,5 +1,6 @@
+#!/usr/bin/env bash
+# Tell the story of passwd
 file="/etc/passwd"
-
 while IFS= read -r line; do
   user=$(echo "$line" | cut -d ':' -f1)
   gid=$(echo "$line" | cut -d ':' -f4)
