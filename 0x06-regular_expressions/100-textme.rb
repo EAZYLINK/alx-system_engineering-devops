@@ -1,4 +1,2 @@
 #!/usr/bin/env ruby
-from = ARGV[0].scan(/from:(.*?)\]/)
-to = ARGV[0].scan(/to: (.*?)\]/)
-puts [from, to, flags].join(',')
+puts ARGV[0].scan(/\[from:(\+?\w+)\] \[to:(\+?\w+)\] \[flags:(-?\d:-?\d:-?\d:-?\d:-?\d)\]/).join(",")
