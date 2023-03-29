@@ -1,40 +1,21 @@
 #!/usr/bin/env bash
 # write a Bash script that configures a new Ubuntu machine to respect above 
 # requirements (this script will be run on the server itself)
-#
-#colors
-blue='\e[1;34m'
-brown='\e[0;33m'
-green='\e\[1;32m'
-reset='\033[0m'
+STRING="Hello World!"
+REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ; \n\t}\n"
+FILE="/etc/nginx/sites-available/default"
 
-echo -e "${blue}Updating and installing $brown}Nginx${blue}.${reset}\"
-sudo apt-get update -y -qq && \
-     sudo apt-get install nginx -y
+ERRORFILE="/usr/share/nginx/html/404error.html"
+FOUR="Ceci n'est pas une page"
+ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
 
-echo -e "\n${blue}Setting up some mirror stuff.${reset}\n"
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo "$STRING" > /var/www/html/index.nginx-debian.html
+sed -i "37i\ $REDIRECT" "$FILE"
 
-# starting nginx service
-sudo service nginx start
+echo "$FOUR" > "$ERRORFILE"
+sed -i "37i\ $ERRORREDIRECT" "$FILE"
 
-# allowing nginx on firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Give the user ownership to website files for easy editing
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chown -R 755 /var/www
-
-# Backup default index
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-
-# Creating new index
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
-
-# Setting up a 404 page
-echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
-sudo sed -i '25i\	error_page 404 /error_404.html;' /etc/nginx/sites-available/default
-
-# Restarting
-sudo service nginx restart
-
-echo -e "\n${green}Completed.${reset} \n"
+service nginx restart
