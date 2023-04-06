@@ -19,5 +19,5 @@ frontend eazylinktechnology-frontend
 
 backend eazylinktechnology-backend
 	balance roundrobin
-	server 453-web-01 35.243.128.200:80 check
-	server 453-web-02 3.239.120.96:80 check
+	server 156813-web-01 100.25.193.56:80 check
+	server 156813-web-02 18.210.19.239:80 check
