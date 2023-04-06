@@ -10,19 +10,14 @@ sudo apt-get install nginx -y
 sudo echo "server {
     listen 80 default_server;
     listen [::]:80 default_server;
-
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
-
     server_name _;
-
     location / {
         try_files $uri $uri/ =404;
     }
-
     # Custom HTTP response header
     add_header X-Served-By \$hostname;
-
 }" > /etc/nginx/sites-available/default
 
 # Restart Nginx to apply changes
