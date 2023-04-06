@@ -8,5 +8,5 @@ sudo service start nginx
 sudo mkdir -p /var/www/eazylinktechnology.tech/html
 sudo chown -R $USER:$USER /var/www/eazylinktechnology.tech/html
 sudo chmod -R 755 /var/www/eazylinktechnology.tech
-echo 'Hello World!' > /var/www/eazylinktechnology.tech/html/index.nginx-debian.html
+echo 'Hello World!' > /var/www/eazylinktechnology.tech/html/index.html
 sudo service restart nginx
