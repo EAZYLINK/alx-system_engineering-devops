@@ -4,6 +4,9 @@
 sudo apt update
 sudo apt install nginx
 sudo ufw allow 'Nginx HTTP'
-sudo systemctl start nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo systemctl restart nginx
+sudo service start nginx
+sudo mkdir -p /var/www/eazylinktechnology.tech/html
+sudo chown -R $USER:$USER /var/www/eazylinktechnology.tech/html
+sudo chmod -R 755 /var/www/eazylinktechnology.tech
+echo 'Hello World!' > /var/www/eazylinktechnology.tech/html/index.nginx-debian.html
+sudo service restart nginx
