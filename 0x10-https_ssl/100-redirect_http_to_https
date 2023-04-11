@@ -1,23 +1,17 @@
 #!/usr/bin/env bash
 # Configure HAproxy to automatically redirect HTTP traffic to HTTPS.
 
-frontend http
-	bind *:80
-	mode http
-	option forwardfor
-	reqadd X-Forwarded-Proto:\ http
-	redirect scheme https code 301 if !{ ssl_fc }
+
+global
+    ssl-default-bind-options ssl-min-ver TLSv1.2
 
 frontend eazylinktechnology_frontend
+	bind *:80
 	bind *:443 ssl crt /etc/haproxy/certs/eazylinktechnology.tech.pem
-	mode http
-	option forwardfor
-	reqadd X-Forwarded-Proto:\ https
+	http-request redirect scheme https code 301 unless { ssl_fc }
 	default_backend eazylinktechnology_backend
 
 backend eazylinktechnology_backend
-	mode http
-   	option forwardfor
 	balance roundrobin
 	server 156813-web-01 100.25.193.56:80 check
 	server 156813-web-02 18.210.19.239:80 check
