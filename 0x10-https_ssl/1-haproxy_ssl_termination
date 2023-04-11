@@ -10,14 +10,14 @@ defaults
 	timeout client  30s
 	timeout server  30s
 
-frontend eazylinktechnology-frontend
+frontend eazylinktechnology.tech
 	bind *:80
-	bind *:443 ssl crt /etc/haproxy/certs/eazylinktechnology.tech.pem
+	bind *:443 ssl crt /etc/haproxy/certs/eazylinktechnology.pem
 	http-request redirect scheme https unless { ssl_fc }
 	http-request set-header X-Forwarded-Proto https
 	default_backend eazylinktechnology-backend
 
 backend eazylinktechnology-backend
 	balance roundrobin
-	server 156813-web-01 100.25.193.56:80 check
-	server 156813-web-02 18.210.19.239:80 check
+	server 156813-web-01 100.25.193.56:443 check
+	server 156813-web-02 18.210.19.239:443 check
