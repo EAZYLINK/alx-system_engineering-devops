@@ -11,16 +11,6 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo touch /etc/nginx/sites-enabled/default
 
 # Add configuration to the new default file
-echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html;
-    server_name _;
-    location / {
-        return 200 'Hello World!';
-    }
-}" | sudo tee /etc/nginx/sites-enabled/default > /dev/null
-
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 # Test configuration and restart nginx
 sudo nginx -t && sudo /etc/init.d/nginx restart
