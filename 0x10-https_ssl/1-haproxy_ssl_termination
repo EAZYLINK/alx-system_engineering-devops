@@ -19,5 +19,5 @@ frontend eazylinktechnology.tech
 
 backend eazylinktechnology-backend
 	balance roundrobin
-	server 156813-web-01 100.25.193.56:443 check
-	server 156813-web-02 18.210.19.239:443 check
+	server 156813-web-01 100.24.237.31:443 check
+	server 156813-web-02 100.25.129.126:443 check
