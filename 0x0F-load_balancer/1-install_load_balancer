@@ -6,7 +6,7 @@ apt-get -y install haproxy=2.7.\*
 # Configure haproxy configuration file to distribute requests using a roundrobin algorithm
 echo '
 frontend eazylinktechnology.tech
-        bind 0:80
+        bind 0:100
         default_backend web_servers
 backend web_servers
         balance roundrobin
