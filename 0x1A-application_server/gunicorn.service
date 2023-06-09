@@ -11,12 +11,10 @@ Group=ubuntu
 # DynamicUser=yes
 # see http://0pointer.net/blog/dynamic-users-with-systemd.html
 RuntimeDirectory=gunicorn
-WorkingDirectory=/home/ubuntu/AirBnB_cloe_v4
-ExecStart=/usr/bin/gunicorn web_dynamic.2-hbnb.wsgi
-ExecReload=/bin/kill -s HUP $MAINPID
-KillMode=mixed
-TimeoutStopSec=5
-PrivateTmp=true
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+ExecStart=/usr/local/bin/gunicorn --bind 0.0.0.0:5003 --workers 3 --error-logfile /tmp/airbnb-error.log --access-logfile /tmp/airbnb-log web_dynamic.2-hbnb:app
+Restart=always
+
 
 [Install]
-WantedBy=multi-user.targe
+WantedBy=multi-user.target
